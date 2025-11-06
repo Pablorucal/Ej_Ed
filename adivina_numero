@@ -1,0 +1,42 @@
+// El  juego de adivinar un número. El valor a adivinar lo tendremos puesto en una variable el valor que nosotros queramos.
+//El número será entre 1 y 100. El programa debe dar pistas de si el número a adivinar es mayor o menor que el introducido.
+//  Tendremos que hacer los siguientes subprocesos (funciones):
+//leerNumero(): Pide un numero y hasta que el usuario no escribe un valor entre 1 y 100, vuelve a pedir el valor.
+//comprobarValor(numeroUsuario, numeroCorrecto): comprueba si el número es correcto; éste  devuelve un número que puede ser:  
+// 0: los dos numeros son iguales  1: el numeroUsuario es mayor que el numeroCorrecto  
+// -1: el numeroUsuario es menor que el numeroCorrecto.
+const prompt = require('prompt-sync')();
+
+let num=58; //numero a adivinar
+
+function leerNumero(){
+    let numUsuario=0;
+    while(numUsuario<1 || numUsuario>100){
+        numUsuario=prompt('Adivina el número (entre 1 y 100):');
+        numUsuario=Number(numUsuario);
+    }
+    return numUsuario;
+}
+function comprobarValor(numUsuario, numCorrecto){
+    if(numUsuario===numCorrecto){
+        return 0;
+    }else if(numUsuario>numCorrecto){
+        return 1;
+    }else{
+        return -1;
+    }
+}
+
+let adivinado=false;
+while(!adivinado){
+    let numeroUsuario=leerNumero();
+    let resultado=comprobarValor(numeroUsuario, num);
+    if(resultado===0){
+        console.log('¡Has adivinado el número!');
+        adivinado=true;
+    }else if(resultado===1){
+        console.log('El número a adivinar es menor.');
+    }else{
+        console.log('El número a adivinar es mayor.');
+    }
+} 
